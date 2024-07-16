@@ -17,7 +17,10 @@ export default {
           Secondary: "#0e750e",
           lightGray : "#999999",
           veryLightGray : "#ccbfbe",
-        }
+        },
+        special: {
+          DEFAULT: "#4ade80"
+        },
       }
     },
   },
