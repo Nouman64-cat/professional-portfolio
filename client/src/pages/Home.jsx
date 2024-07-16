@@ -1,9 +1,14 @@
+import CustomCursor from "../components/CustomCursor"
+import LeftSide from "../components/LeftSide"
+import RighSide from "../components/RighSide"
 
 
 const Home = () => {
   return (
-    <div>
-        <h1 className="text-5xl">Home Page</h1>
+    <div className="min-h-screen w-full flex">
+      <LeftSide />
+      <RighSide />
+      <CustomCursor />
     </div>
   )
 }
