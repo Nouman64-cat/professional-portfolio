@@ -2,11 +2,12 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Hashtag from './Hashtag';
 
-const ProjectCard = ({ designation, tags = [], start, end }) => {
+const ExperienceCard = ({ designation, tags = [], start, end }) => {
   const [active, setActive] = useState(false);
 
   const handleMouseEnter = () => {
     setActive(true);
+
   };
 
   const handleMouseLeave = () => {
@@ -26,7 +27,7 @@ const ProjectCard = ({ designation, tags = [], start, end }) => {
       </div>
       <div className='w-[78%] gap-4 flex flex-col'>
         {/* right side of card */}
-        <h1 className={`text-[17px] text-white font-montserrat ${active ? "text-special" : "text-white"} transition duration-300 ease-in-out`}>
+        <h1 className={`text-[17px] font-montserrat transition duration-300 ease-in-out ${active ? 'text-special' : 'text-white'}`}>
           {designation}
         </h1>
         <p className='text-primary-lightGray font-poppins text-[12px]'>
@@ -42,11 +43,11 @@ const ProjectCard = ({ designation, tags = [], start, end }) => {
   );
 };
 
-ProjectCard.propTypes = {
+ExperienceCard.propTypes = {
   designation: PropTypes.string.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   start: PropTypes.string.isRequired,
   end: PropTypes.string.isRequired,
 };
 
-export default ProjectCard;
+export default ExperienceCard;

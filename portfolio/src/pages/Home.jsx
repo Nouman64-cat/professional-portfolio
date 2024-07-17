@@ -1,5 +1,6 @@
 
 import CustomCursor from "../components/CustomCursor"
+import FloatingShapes from "../components/FloatingShapes"
 import LeftSide from "../components/LeftSide"
 import RighSide from "../components/RighSide"
 
@@ -11,6 +12,8 @@ const Home = () => {
       <LeftSide />
       <RighSide />
       <CustomCursor />
+      <FloatingShapes />
+      
     </div>
   )
 }
