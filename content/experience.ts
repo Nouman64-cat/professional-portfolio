@@ -5,7 +5,7 @@ export const roles: Role[] = [
   {
     id: "rizviz",
     title: "Lead AI/ML Engineer",
-    company: "Rizviz Internation Impex",
+    company: "Rizviz International Impex",
     location: "Lahore, Pakistan",
     period: "Feb 2026 — Present",
     start: "2026-02",
@@ -20,7 +20,14 @@ export const roles: Role[] = [
       "Built a robust LLM evaluation framework combining offline benchmarking with online A/B testing to guarantee model reliability, consistency and production trustworthiness.",
       "Led and mentored a cross-functional team of 12 engineers across ML, platform and infrastructure, driving architectural strategy, roadmap planning and alignment.",
     ],
-    stack: ["LangGraph", "AutoGen", "Vector DBs", "LLM Serving", "Kubernetes", "Evaluation"],
+    stack: [
+      "LangGraph",
+      "AutoGen",
+      "Vector DBs",
+      "LLM Serving",
+      "Kubernetes",
+      "Evaluation",
+    ],
   },
   {
     id: "geniteam",
@@ -39,7 +46,14 @@ export const roles: Role[] = [
       "Architected a centralised feature store and reusable training pipelines, accelerating the team's experimentation lifecycle and model iteration speed.",
       "Developed automated monitoring and retraining pipelines to ensure continuous model performance and proactively handle data drift in production.",
     ],
-    stack: ["PyTorch", "Feature Store", "Recommenders", "Fraud Detection", "MLOps", "NVIDIA"],
+    stack: [
+      "PyTorch",
+      "Feature Store",
+      "Recommenders",
+      "Fraud Detection",
+      "MLOps",
+      "NVIDIA",
+    ],
   },
   {
     id: "onyxtec",
@@ -56,7 +70,13 @@ export const roles: Role[] = [
       "Designed and deployed highly scalable REST-based microservices supporting real-time self-healing and rigorous system compliance.",
       "Enhanced machine learning model accuracy through advanced feature engineering and comprehensive hyperparameter optimisation.",
     ],
-    stack: ["Node.js", "REST Microservices", "React", "Healthcare Compliance", "Feature Engineering"],
+    stack: [
+      "Node.js",
+      "REST Microservices",
+      "React",
+      "Healthcare Compliance",
+      "Feature Engineering",
+    ],
   },
   {
     id: "career-twearkz",
@@ -73,7 +93,13 @@ export const roles: Role[] = [
       "Designed complex analytical dashboards supporting business intelligence, data visualisation and executive decision-making.",
       "Automated internal data workflows, significantly improving system reliability and operational efficiency across organisational data platforms.",
     ],
-    stack: ["React", "Next.js", "TypeScript", "Data Visualisation", "Dashboards"],
+    stack: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Data Visualisation",
+      "Dashboards",
+    ],
   },
   {
     id: "excelo",
