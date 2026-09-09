@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nouman Ejaz — Portfolio
 
-## Getting Started
+An interactive personal portfolio for a Lead AI/ML & Cloud Engineer, built with
+Next.js 16 (App Router), React 19, Tailwind CSS v4 and Motion.
 
-First, run the development server:
+Every section renders from typed data in `content/`, so updating the site means
+editing a data file — not JSX.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run lint     # ESLint (incl. React Compiler rules)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Set the canonical URL before deploying so metadata, the sitemap and the OG
+image resolve absolutely:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# .env.production
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## What's interactive
 
-## Learn More
+| Feature | Where |
+| --- | --- |
+| Working shell — `help`, `whoami`, `skills <group>`, `experience`, `systems`, `goto <section>`, `theme`, `resume`, `clear`, with history (↑/↓) and Tab completion | `components/ui/terminal.tsx`, `lib/terminal.ts` |
+| ⌘K / Ctrl+K command palette over sections, skills, systems and contact actions | `components/layout/command-palette.tsx` |
+| Pointer-reactive neural-network canvas behind the hero | `components/ui/neural-field.tsx` |
+| Magnetic buttons, 3D tilt cards with cursor spotlight, cursor glow | `components/ui/magnetic.tsx`, `tilt-card.tsx`, `components/layout/cursor-glow.tsx` |
+| Filterable + searchable skills grid, deep-linkable from the palette | `components/sections/skills.tsx` |
+| Scroll-linked experience timeline with expandable roles | `components/sections/experience.tsx` |
+| System selector with animated architecture pipelines | `components/sections/systems.tsx` |
+| Animated metric counters, scroll progress bar, scroll-spy nav | `components/ui/counter.tsx`, `components/layout/` |
+| Dark/light theme with no flash on load | `components/providers/theme-provider.tsx` |
 
-To learn more about Next.js, take a look at the following resources:
+## Project structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/                    Route, layout, global styles, sitemap/robots, OG image
+components/
+  layout/               Header, footer, command palette, scroll progress, cursor glow
+  providers/            Theme and command-palette context
+  sections/             One component per page section
+  seo/                  schema.org JSON-LD
+  ui/                   Reusable primitives (Section, Reveal, TiltCard, Terminal, …)
+content/                All site copy and data — the single source of truth
+lib/                    Utilities, hooks, terminal command engine, site config
+types/                  Shared content types
+public/                 Résumé PDF and static assets
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Editing the content
 
-## Deploy on Vercel
+| To change | Edit |
+| --- | --- |
+| Name, tagline, contact details, availability, metrics, education | `content/profile.ts` |
+| Skill groups and technologies | `content/skills.ts` |
+| Roles and achievements | `content/experience.ts` |
+| Flagship systems and their pipelines | `content/systems.ts` |
+| Colours, typography, animation tokens | `app/globals.css` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Social links:** `socialLinks` in `content/profile.ts` ships with empty
+`href` values for GitHub and LinkedIn. Links with an empty `href` are filtered
+out at render time, so nothing broken is displayed — fill those two in and the
+icons appear in the footer, the contact section and the command palette.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Résumé:** replace `public/nouman-ejaz-resume.pdf` to update the download.
+
+## Accessibility & performance notes
+
+- Every animation respects `prefers-reduced-motion`; the canvas renders a
+  single static frame and the typewriter shows plain text.
+- The neural-field loop pauses when scrolled out of view or the tab is hidden.
+- Skip-to-content link, focus-visible rings, ARIA-labelled controls, keyboard
+  navigation in the palette and terminal.
+- The page is fully statically prerendered — content is in the HTML for
+  crawlers, with `Person` JSON-LD for structured data.

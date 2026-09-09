@@ -114,9 +114,9 @@
   }
 
   html {
+    /* Anchor clearance lives on <Section> (scroll-mt-24) so the scroll-spy
+       offset and the landing position stay in sync. */
     scroll-behavior: smooth;
-    /* Sticky header clearance for anchor jumps. */
-    scroll-padding-top: 6rem;
     -webkit-tap-highlight-color: transparent;
   }
 

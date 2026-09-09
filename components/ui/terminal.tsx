@@ -42,9 +42,16 @@ export function Terminal({ className }: { className?: string }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Follow new output, but leave the banner readable from the top on load.
+  const pinnedToBottom = useRef(false);
   useEffect(() => {
     const node = scrollRef.current;
-    if (node) node.scrollTop = node.scrollHeight;
+    if (!node) return;
+    if (!pinnedToBottom.current) {
+      pinnedToBottom.current = true;
+      return;
+    }
+    node.scrollTop = node.scrollHeight;
   }, [lines]);
 
   const submit = useCallback(

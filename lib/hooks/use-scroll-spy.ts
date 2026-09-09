@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
  * trailing off the top of the viewport. Returns `null` above the first
  * section (i.e. while the hero is in view).
  */
-export function useScrollSpy(sectionIds: string[], offset = 140) {
+export function useScrollSpy(sectionIds: string[], offset = 170) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {

@@ -50,7 +50,7 @@ export function Hero() {
     <section
       id="hero"
       aria-labelledby="hero-heading"
-      className="relative isolate overflow-hidden pt-32 pb-16 sm:pt-40 sm:pb-24"
+      className="relative isolate overflow-hidden pt-32 pb-14 sm:pt-40 sm:pb-20"
     >
       {/* Layered backdrop: grid, drifting aurora, interactive neural field. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
@@ -58,7 +58,7 @@ export function Hero() {
         <div className="animate-aurora absolute -top-40 -left-32 size-[520px] rounded-full bg-accent/12 blur-[120px]" />
         <div className="animate-aurora absolute -top-24 right-0 size-[420px] rounded-full bg-accent-2/12 blur-[120px] [animation-delay:-8s]" />
       </div>
-      <div aria-hidden className="absolute inset-0 -z-10 opacity-70">
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-70 light:opacity-40">
         <NeuralField />
       </div>
 
