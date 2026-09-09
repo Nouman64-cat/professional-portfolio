@@ -2,26 +2,28 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
-import { systems } from "@/content";
+import { projects, systems } from "@/content";
 import { contentIcons } from "@/components/ui/icons";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Tag } from "@/components/ui/tag";
+import { focusProject } from "@/lib/events";
 import { cn } from "@/lib/utils";
 
 export function Systems() {
   const [activeId, setActiveId] = useState(systems[0].id);
   const active = systems.find((system) => system.id === activeId) ?? systems[0];
   const ActiveIcon = contentIcons[active.icon];
+  const relatedProject = projects.find((project) => project.id === active.relatedProjectId);
 
   return (
     <Section id="systems">
       <SectionHeading
         index="04 — Systems"
-        title="The architectures behind the numbers."
-        description="Four production systems, each with its own failure modes and cost profile. Select one to walk its pipeline."
+        title="Four decisions, not four buzzwords."
+        description="Every entry here is one specific engineering call from a project below — the trade-off, and why it went that way. Select one to walk its pipeline, then jump to the build."
       />
 
       <div className="mt-14 grid gap-6 lg:grid-cols-[minmax(0,340px)_1fr] lg:gap-8">
@@ -115,6 +117,21 @@ export function Systems() {
               <p className="mt-6 text-base leading-relaxed text-muted text-pretty">
                 {active.description}
               </p>
+
+              {relatedProject ? (
+                <button
+                  type="button"
+                  // Just focusProject: its listener in the Projects section
+                  // already scrolls straight to this card. Also calling
+                  // scrollToSection("projects") would race it and win,
+                  // landing on the section top instead of the right card.
+                  onClick={() => focusProject(relatedProject.id)}
+                  className="mt-5 inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3.5 py-2 font-mono text-xs text-accent transition-colors hover:border-accent/50 hover:bg-accent/10"
+                >
+                  See it built: {relatedProject.title}
+                  <ArrowUpRight className="size-3.5" aria-hidden />
+                </button>
+              ) : null}
 
               <div className="mt-8">
                 <p className="font-mono text-[11px] tracking-[0.18em] text-subtle uppercase">

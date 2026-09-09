@@ -82,6 +82,12 @@ export interface SystemHighlight {
   /** Ordered stages rendered as an architecture flow diagram. */
   pipeline: string[];
   stack: string[];
+  /**
+   * Id of the `Project` this system is the real implementation of. Omit
+   * when the system is a composite of production experience rather than
+   * one showcased build — don't force a link that isn't genuinely true.
+   */
+  relatedProjectId?: string;
 }
 
 export interface EducationEntry {

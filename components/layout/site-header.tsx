@@ -74,12 +74,15 @@ export function SiteHeader() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+        // At lg+ the row below becomes its own floating glass capsule, so
+        // this outer strip goes fully transparent there — otherwise a
+        // second, edge-to-edge glass layer would show behind the pill.
         condensed
-          ? "border-b border-border bg-bg/70 backdrop-blur-xl"
+          ? "border-b border-border bg-bg/70 backdrop-blur-xl lg:border-b-0 lg:bg-transparent lg:backdrop-blur-none"
           : "border-b border-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
+      <div className="nav-shell mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-5 transition-all duration-300 sm:px-8">
         <button
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

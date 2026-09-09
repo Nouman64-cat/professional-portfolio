@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { Check, ExternalLink } from "lucide-react";
 
 import { projects } from "@/content";
@@ -9,8 +12,38 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Tag } from "@/components/ui/tag";
 import { TiltCard } from "@/components/ui/tilt-card";
+import { onFocusProject } from "@/lib/events";
+import { cn } from "@/lib/utils";
+
+/** DOM id for a project card — also used by the Systems section's "See it in" links. */
+export function projectDomId(projectId: string) {
+  return `project-${projectId}`;
+}
 
 export function Projects() {
+  const [highlightedId, setHighlightedId] = useState<string | null>(null);
+  const highlightTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // A system in the section above can deep-link here (see systems.tsx);
+  // scroll to that card and flash it briefly so the jump is legible.
+  useEffect(() => {
+    const unsubscribe = onFocusProject((projectId) => {
+      if (highlightTimeout.current) clearTimeout(highlightTimeout.current);
+
+      setHighlightedId(projectId);
+      document
+        .getElementById(projectDomId(projectId))
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      highlightTimeout.current = setTimeout(() => setHighlightedId(null), 2200);
+    });
+
+    return () => {
+      unsubscribe();
+      if (highlightTimeout.current) clearTimeout(highlightTimeout.current);
+    };
+  }, []);
+
   return (
     <Section id="projects">
       <SectionHeading
@@ -22,10 +55,17 @@ export function Projects() {
       <div className="mt-14 space-y-6">
         {projects.map((project, index) => {
           const Icon = contentIcons[project.icon];
+          const highlighted = highlightedId === project.id;
 
           return (
             <Reveal key={project.id} delay={index * 0.08}>
-              <TiltCard className="p-6 sm:p-8">
+              <TiltCard
+                id={projectDomId(project.id)}
+                className={cn(
+                  "scroll-mt-24 p-6 transition-shadow duration-500 sm:p-8",
+                  highlighted && "ring-2 ring-accent/60",
+                )}
+              >
                 <div className="grid gap-8 lg:grid-cols-[280px_1fr]">
                   <div className="lg:border-r lg:border-border lg:pr-8">
                     <div className="flex items-center gap-3">
