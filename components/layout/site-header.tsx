@@ -24,9 +24,11 @@ export function SiteHeader() {
   useMotionValueEvent(scrollY, "change", (latest) => setCondensed(latest > 24));
 
   // Close the mobile sheet whenever the viewport grows past the breakpoint.
+  // Matches the `lg` breakpoint below, where the full nav takes over — with
+  // seven nav items plus the header CTAs, `md` is too narrow to fit them.
   useEffect(() => {
     if (!menuOpen) return;
-    const media = window.matchMedia("(min-width: 768px)");
+    const media = window.matchMedia("(min-width: 1024px)");
     const onChange = () => media.matches && setMenuOpen(false);
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
@@ -61,7 +63,7 @@ export function SiteHeader() {
           </span>
         </button>
 
-        <nav aria-label="Sections" className="hidden md:block">
+        <nav aria-label="Sections" className="hidden lg:block">
           <ul className="flex items-center gap-1">
             {navItems.map((item) => {
               const active = activeId === item.id;
@@ -92,7 +94,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Magnetic className="hidden sm:inline-flex">
+          <Magnetic className="hidden lg:inline-flex">
             <a
               href={profile.calendlyUrl}
               target="_blank"
@@ -122,7 +124,7 @@ export function SiteHeader() {
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="grid size-9 place-items-center rounded-full border border-border bg-surface text-muted md:hidden"
+            className="grid size-9 place-items-center rounded-full border border-border bg-surface text-muted lg:hidden"
           >
             {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
@@ -138,7 +140,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-b border-border bg-bg/95 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-b border-border bg-bg/95 backdrop-blur-xl lg:hidden"
           >
             <ul className="mx-auto flex max-w-6xl flex-col px-5 py-3 sm:px-8">
               {navItems.map((item) => (

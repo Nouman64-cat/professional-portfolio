@@ -86,7 +86,7 @@ export function Contact() {
   return (
     <Section id="contact">
       <SectionHeading
-        index="06 — Contact"
+        index="07 — Contact"
         title="Have a system worth building? Let's talk."
         description="I'm open to senior and lead AI engineering roles, and to consulting on RAG, agentic systems and LLM infrastructure."
       />

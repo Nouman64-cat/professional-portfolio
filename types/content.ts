@@ -98,3 +98,25 @@ export interface Service {
   /** What's included, 2–4 short bullets. */
   deliverables: string[];
 }
+
+export interface ProjectLink {
+  label: string;
+  href: string;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  tagline: string;
+  icon: IconName;
+  /** Short, verifiable status chip, e.g. "Live product". */
+  status: string;
+  /** Headline outcome or scale statement. */
+  impact: string;
+  description: string;
+  /** What's real about it — 3–4 concrete, checkable bullets. */
+  highlights: string[];
+  stack: string[];
+  /** 0–2 entries: live demo first, then source. Omit what doesn't exist. */
+  links: ProjectLink[];
+}

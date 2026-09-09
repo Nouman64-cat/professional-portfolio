@@ -12,7 +12,7 @@ export function Pricing() {
   return (
     <Section id="pricing">
       <SectionHeading
-        index="05 — Pricing"
+        index="06 — Pricing"
         title="Straightforward rates. A free first conversation."
         description="Every engagement starts with a free 30-minute call — then a simple hourly rate for the work itself. No retainers required, no surprise invoices."
       />

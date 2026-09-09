@@ -1,4 +1,4 @@
-import { education, profile, roles, services, socialLinks } from "@/content";
+import { education, profile, projects, roles, services, socialLinks } from "@/content";
 import { siteConfig } from "@/lib/site";
 
 /**
@@ -46,6 +46,12 @@ export function PersonJsonLd() {
         priceCurrency: "USD",
         unitText: "HOUR",
       },
+    })),
+    owns: projects.map((project) => ({
+      "@type": "CreativeWork",
+      name: project.title,
+      description: project.description,
+      url: project.links.find((link) => link.label.toLowerCase().includes("github"))?.href,
     })),
   };
 

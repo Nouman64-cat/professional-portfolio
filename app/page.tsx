@@ -3,6 +3,7 @@ import { Contact } from "@/components/sections/contact";
 import { Experience } from "@/components/sections/experience";
 import { Hero } from "@/components/sections/hero";
 import { Pricing } from "@/components/sections/pricing";
+import { Projects } from "@/components/sections/projects";
 import { Skills } from "@/components/sections/skills";
 import { Systems } from "@/components/sections/systems";
 import { PersonJsonLd } from "@/components/seo/person-json-ld";
@@ -20,6 +21,8 @@ export default function HomePage() {
       <Experience />
       <div className="rule mx-auto max-w-6xl" />
       <Systems />
+      <div className="rule mx-auto max-w-6xl" />
+      <Projects />
       <div className="rule mx-auto max-w-6xl" />
       <Pricing />
       <div className="rule mx-auto max-w-6xl" />

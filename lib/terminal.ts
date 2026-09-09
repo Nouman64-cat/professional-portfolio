@@ -1,4 +1,4 @@
-import { profile, roles, services, skillGroups, systems } from "@/content";
+import { profile, projects, roles, services, skillGroups, systems } from "@/content";
 
 export type LineTone = "default" | "muted" | "accent" | "error" | "prompt";
 
@@ -112,6 +112,18 @@ const commandList: CommandSpec[] = [
       ]),
   },
   {
+    name: "projects",
+    usage: "projects",
+    description: "Real, shipped work — with links",
+    run: () =>
+      projects.flatMap((project) => [
+        `${project.title} — ${project.tagline}`,
+        `  ${project.impact} · ${project.status}`,
+        ...project.links.map((link) => `  ${link.label}: ${link.href}`),
+        "",
+      ]),
+  },
+  {
     name: "pricing",
     usage: "pricing",
     description: "Hourly rates for every service",
@@ -157,10 +169,18 @@ const commandList: CommandSpec[] = [
   {
     name: "goto",
     usage: "goto <section>",
-    description: "Scroll to about | skills | experience | systems | pricing | contact",
+    description: "Scroll to about | skills | experience | systems | projects | pricing | contact",
     run: (args, context) => {
       const target = args[0]?.toLowerCase();
-      const sections = ["about", "skills", "experience", "systems", "pricing", "contact"];
+      const sections = [
+        "about",
+        "skills",
+        "experience",
+        "systems",
+        "projects",
+        "pricing",
+        "contact",
+      ];
       if (!target || !sections.includes(target)) {
         return [`goto: expected one of ${sections.join(", ")}`];
       }
@@ -219,7 +239,12 @@ export function runCommand(
   if (!command) {
     // A couple of friendly nudges for commands people reflexively try.
     if (name === "ls") {
-      return [makeLine("about  skills  experience  systems  contact  resume", "muted")];
+      return [
+        makeLine(
+          "about  skills  experience  systems  projects  pricing  contact  resume  book",
+          "muted",
+        ),
+      ];
     }
     if (name === "sudo") {
       return [makeLine("Nice try. You already have full access. 🙂", "accent")];

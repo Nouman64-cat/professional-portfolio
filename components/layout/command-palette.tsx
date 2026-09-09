@@ -16,7 +16,7 @@ import {
   Sun,
 } from "lucide-react";
 
-import { navItems, profile, skillGroups, socialLinks, systems } from "@/content";
+import { navItems, profile, projects, skillGroups, socialLinks, systems } from "@/content";
 import { useTheme } from "@/components/providers/theme-provider";
 import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
 import { useMounted } from "@/lib/hooks/use-mounted";
@@ -26,7 +26,7 @@ import { cn, scrollToSection } from "@/lib/utils";
 
 const brandIcons = { github: GitHubIcon, linkedin: LinkedInIcon } as const;
 
-type CommandGroup = "Navigate" | "Skills" | "Systems" | "Actions";
+type CommandGroup = "Navigate" | "Skills" | "Systems" | "Projects" | "Actions";
 
 interface CommandItem {
   id: string;
@@ -41,7 +41,7 @@ interface CommandItem {
   keepOpen?: boolean;
 }
 
-const GROUP_ORDER: CommandGroup[] = ["Navigate", "Skills", "Systems", "Actions"];
+const GROUP_ORDER: CommandGroup[] = ["Navigate", "Skills", "Systems", "Projects", "Actions"];
 
 interface CommandPaletteProps {
   open: boolean;
@@ -122,6 +122,16 @@ function PaletteDialog({ onClose }: { onClose: () => void }) {
       perform: () => scrollToSection("systems"),
     }));
 
+    const projectItems: CommandItem[] = projects.map((project) => ({
+      id: `project-${project.id}`,
+      label: project.title,
+      hint: project.tagline,
+      group: "Projects",
+      icon: contentIcons[project.icon],
+      keywords: `${project.title} ${project.tagline} ${project.stack.join(" ")}`,
+      perform: () => scrollToSection("projects"),
+    }));
+
     const brandLinkActions: CommandItem[] = socialLinks
       .filter((link) => link.href.length > 0 && link.icon in brandIcons)
       .map((link) => ({
@@ -199,7 +209,7 @@ function PaletteDialog({ onClose }: { onClose: () => void }) {
       },
     ];
 
-    return [...navigate, ...skills, ...systemItems, ...actions];
+    return [...navigate, ...skills, ...systemItems, ...projectItems, ...actions];
   }, [copied, copy, theme, toggleTheme]);
 
   const results = useMemo(() => {
@@ -304,7 +314,7 @@ function PaletteDialog({ onClose }: { onClose: () => void }) {
               setQuery(event.target.value);
               setActiveIndex(0);
             }}
-            placeholder="Search sections, skills, systems…"
+            placeholder="Search sections, skills, projects…"
             aria-label="Search commands"
             className="w-full bg-transparent py-4 text-sm text-fg outline-none placeholder:text-subtle"
           />

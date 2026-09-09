@@ -24,7 +24,7 @@ const toneClass = {
   prompt: "text-fg",
 } as const;
 
-const QUICK_COMMANDS = ["whoami", "skills", "experience", "pricing", "book"];
+const QUICK_COMMANDS = ["whoami", "projects", "skills", "pricing", "book"];
 
 /**
  * A real, keyboard-driven shell over the portfolio's content.
