@@ -63,11 +63,11 @@ export const socialLinks: SocialLink[] = [
 
 export const navItems: NavItem[] = [
   { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
+  { id: "skills", label: "Skills", secondary: true },
   { id: "experience", label: "Experience" },
-  { id: "systems", label: "Systems" },
+  { id: "systems", label: "Systems", secondary: true },
   { id: "projects", label: "Projects" },
-  { id: "open-source", label: "Open Source" },
+  { id: "open-source", label: "Open Source", secondary: true },
   { id: "pricing", label: "Pricing" },
   { id: "contact", label: "Contact" },
 ];

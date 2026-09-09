@@ -16,7 +16,7 @@ export function Projects() {
       <SectionHeading
         index="05 — Projects"
         title="Selected work, not hypotheticals."
-        description="Three systems designed and built end to end — the code is real, and mostly public. Click through to any of them."
+        description="Systems designed and built end to end, plus applied AI work against real infrastructure — the code is real, and mostly public. Click through to any of them."
       />
 
       <div className="mt-14 space-y-6">

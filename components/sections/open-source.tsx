@@ -21,7 +21,7 @@ export function OpenSource() {
       <SectionHeading
         index="06 — Open Source"
         title="Published, not just prototyped."
-        description="Two packages live on public registries, plus a hands-on lab in applied network AI — proof the work leaves my machine."
+        description="Two packages live on public registries — proof the work leaves my machine, not just a portfolio screenshot."
       />
 
       <div className="mt-14 space-y-6">

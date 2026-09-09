@@ -61,4 +61,23 @@ export const projects: Project[] = [
     stack: ["Node.js", "Express", "MySQL", "Socket.IO", "Stripe", "React", "GraphQL", "LangChain", "Pinecone", "Expo"],
     links: [{ label: "View on GitHub", href: "https://github.com/Nouman64-cat/courtcierge" }],
   },
+  {
+    id: "5g-ai-network-lab",
+    title: "5G AI Network Lab",
+    tagline: "Applied lab: agentic bandwidth management on a live 5G core",
+    icon: "gauge",
+    // Honest framing: this is a hands-on lab (largely NVIDIA DLI-authored
+    // infrastructure), not an original build like the three projects above.
+    status: "Hands-on lab",
+    impact: "Closed-loop AI control on a real 5G core",
+    description:
+      "A hands-on lab pairing an open-source 5G network simulation (OAI core, RAN, multi-slice UEs) with a LangGraph agent that reads live traffic metrics and dynamically rebalances bandwidth across network slices — applied agentic AI against real network infrastructure, not a toy environment.",
+    highlights: [
+      "Full OAI-based 5G core, RAN (gNodeB via FlexRIC) and two UE simulators, orchestrated with Docker Compose",
+      "A LangGraph agent closes the loop — reads iPerf-generated traffic metrics from a Kinetica database and issues live slice-bandwidth adjustments through FlexRIC",
+      "Grafana dashboards for real-time visibility into per-slice throughput and packet loss",
+    ],
+    stack: ["LangGraph", "Python", "Kinetica", "Docker", "OAI 5G Core/RAN", "Grafana"],
+    links: [{ label: "View on GitHub", href: "https://github.com/Nouman64-cat/5G-AI-Network-Lab" }],
+  },
 ];

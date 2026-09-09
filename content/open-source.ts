@@ -1,8 +1,9 @@
 import type { OpenSourceEntry } from "@/types/content";
 
 /**
- * Published packages and applied labs — things that either left this machine
- * onto a public registry, or ran against real infrastructure. Newest first.
+ * Published packages — things that left this machine onto a public
+ * registry. Newest first. (The 5G AI Network Lab lives under `projects.ts`
+ * instead — it's an applied lab, not a package.)
  */
 export const openSourceEntries: OpenSourceEntry[] = [
   {
@@ -50,21 +51,5 @@ export const openSourceEntries: OpenSourceEntry[] = [
         href: "https://github.com/Nouman64-cat/react-voice-action-router",
       },
     ],
-  },
-  {
-    id: "5g-ai-network-lab",
-    title: "5G AI Network Lab",
-    tagline: "Applied lab: agentic bandwidth management on a live 5G core",
-    icon: "gauge",
-    status: "Hands-on lab",
-    description:
-      "A hands-on lab pairing an open-source 5G network simulation (OAI core, RAN, multi-slice UEs) with a LangGraph agent that reads live traffic metrics and dynamically rebalances bandwidth across network slices — applied agentic AI against real network infrastructure, not a toy environment.",
-    highlights: [
-      "Full OAI-based 5G core, RAN (gNodeB via FlexRIC) and two UE simulators, orchestrated with Docker Compose",
-      "A LangGraph agent closes the loop — reads iPerf-generated traffic metrics from a Kinetica database and issues live slice-bandwidth adjustments through FlexRIC",
-      "Grafana dashboards for real-time visibility into per-slice throughput and packet loss",
-    ],
-    stack: ["LangGraph", "Python", "Kinetica", "Docker", "OAI 5G Core/RAN", "Grafana"],
-    links: [{ label: "View on GitHub", href: "https://github.com/Nouman64-cat/5G-AI-Network-Lab" }],
   },
 ];

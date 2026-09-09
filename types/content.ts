@@ -22,6 +22,12 @@ export interface NavItem {
   /** DOM id of the section this item scrolls to. */
   id: string;
   label: string;
+  /**
+   * Folded into the header's "More" dropdown instead of shown inline, to
+   * keep the desktop nav from getting crowded. Footer, scroll-spy and the
+   * command palette ignore this — every section stays fully reachable.
+   */
+  secondary?: boolean;
 }
 
 export interface SocialLink {
