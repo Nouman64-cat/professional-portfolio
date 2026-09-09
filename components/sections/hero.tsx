@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, Command, Download, MapPin, Sparkles } from "lucide-react";
+import { ArrowDown, CalendarClock, Command, DollarSign, Download, MapPin } from "lucide-react";
 import { motion } from "motion/react";
 
 import { profile } from "@/content";
@@ -111,31 +111,45 @@ export function Hero() {
 
             <motion.div variants={item} className="mt-9 flex flex-wrap items-center gap-3">
               <Magnetic>
-                <ActionLink href="#contact" onClick={(event) => {
-                  event.preventDefault();
-                  scrollToSection("contact");
-                }}>
-                  <Sparkles className="size-4" aria-hidden />
-                  Let&apos;s work together
+                <ActionLink href={profile.calendlyUrl} target="_blank" rel="noreferrer noopener">
+                  <CalendarClock className="size-4" aria-hidden />
+                  Book free AI consultation
                 </ActionLink>
               </Magnetic>
 
               <Magnetic>
                 <ActionLink
                   variant="secondary"
-                  href={profile.resumePath}
-                  target="_blank"
-                  rel="noreferrer noopener"
+                  href="#pricing"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    scrollToSection("pricing");
+                  }}
                 >
-                  <Download className="size-4" aria-hidden />
-                  Résumé
+                  <DollarSign className="size-4" aria-hidden />
+                  View pricing
                 </ActionLink>
               </Magnetic>
+            </motion.div>
+
+            <motion.div
+              variants={item}
+              className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2"
+            >
+              <a
+                href={profile.resumePath}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center gap-1.5 text-sm text-subtle transition-colors hover:text-accent"
+              >
+                <Download className="size-3.5" aria-hidden />
+                Download résumé
+              </a>
 
               <button
                 type="button"
                 onClick={() => setPaletteOpen(true)}
-                className="inline-flex items-center gap-2 rounded-full px-3 py-2.5 text-sm text-subtle transition-colors hover:text-accent"
+                className="inline-flex items-center gap-2 text-sm text-subtle transition-colors hover:text-accent"
               >
                 <Command className="size-3.5" aria-hidden />
                 Press
@@ -155,8 +169,8 @@ export function Hero() {
             <Terminal />
             <p className="mt-3 text-center font-mono text-[11px] text-subtle">
               This terminal is real — try{" "}
-              <span className="text-accent">skills agentic</span> or{" "}
-              <span className="text-accent">goto systems</span>
+              <span className="text-accent">pricing</span> or{" "}
+              <span className="text-accent">book</span>
             </p>
           </motion.div>
         </div>

@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "motion/react";
-import { Command, Menu, X } from "lucide-react";
+import { CalendarClock, Command, Menu, X } from "lucide-react";
 
 import { navItems, profile } from "@/content";
 import { useCommandPalette } from "@/components/providers/command-palette-provider";
+import { Magnetic } from "@/components/ui/magnetic";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { useScrollSpy } from "@/lib/hooks/use-scroll-spy";
 import { cn, scrollToSection } from "@/lib/utils";
@@ -91,10 +92,22 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <Magnetic className="hidden sm:inline-flex">
+            <a
+              href={profile.calendlyUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="accent-gradient inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold text-accent-contrast shadow-[0_8px_24px_-10px_var(--glow)] transition-all hover:brightness-110"
+            >
+              <CalendarClock className="size-3.5" aria-hidden />
+              Free consult
+            </a>
+          </Magnetic>
+
           <button
             type="button"
             onClick={() => setPaletteOpen(true)}
-            className="hidden items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent/50 hover:text-fg sm:flex"
+            className="hidden items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent/50 hover:text-fg lg:flex"
           >
             <Command className="size-3.5" aria-hidden />
             <span>Search</span>
@@ -140,7 +153,17 @@ export function SiteHeader() {
                   </button>
                 </li>
               ))}
-              <li className="pt-3">
+              <li className="flex flex-col gap-2 pt-3">
+                <a
+                  href={profile.calendlyUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="accent-gradient flex w-full items-center justify-center gap-2 rounded-full px-3 py-2.5 text-sm font-semibold text-accent-contrast"
+                >
+                  <CalendarClock className="size-4" aria-hidden />
+                  Book free AI consultation
+                </a>
+
                 <button
                   type="button"
                   onClick={() => {

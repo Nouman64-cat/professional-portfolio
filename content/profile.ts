@@ -19,6 +19,8 @@ export const profile = {
   availability: "Open to senior & lead AI engineering roles",
   experienceYears: "4+",
   resumePath: "/nouman-ejaz-resume.pdf",
+  /** Free 30-minute intro call — used by the header, hero, pricing and contact CTAs. */
+  calendlyUrl: "https://calendly.com/working-nouman-ejaz/ai-consultation",
   tagline:
     "I architect and scale enterprise-grade AI platforms that serve millions of users.",
   summary: [
@@ -33,8 +35,18 @@ export const profile = {
  * header, hero, footer and the ⌘K command palette.
  */
 export const socialLinks: SocialLink[] = [
-  { label: "GitHub", href: "", icon: "github", handle: "Add your GitHub URL" },
-  { label: "LinkedIn", href: "", icon: "linkedin", handle: "Add your LinkedIn URL" },
+  {
+    label: "GitHub",
+    href: "https://github.com/Nouman64-cat",
+    icon: "github",
+    handle: "github.com/Nouman64-cat",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/nouman-ejaz-64251125b/",
+    icon: "linkedin",
+    handle: "in/nouman-ejaz-64251125b",
+  },
   {
     label: "Email",
     href: `mailto:${profile.email}`,
@@ -54,6 +66,7 @@ export const navItems: NavItem[] = [
   { id: "skills", label: "Skills" },
   { id: "experience", label: "Experience" },
   { id: "systems", label: "Systems" },
+  { id: "pricing", label: "Pricing" },
   { id: "contact", label: "Contact" },
 ];
 

@@ -20,6 +20,10 @@ export const siteConfig = {
     "MLOps",
     "Cloud Engineer",
     "Next.js",
+    "AI Consultant",
+    "System Architecture",
+    "Microservices Migration",
+    "Freelance AI Engineer",
     "Nouman Ejaz",
   ],
 } as const;

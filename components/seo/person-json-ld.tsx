@@ -1,4 +1,4 @@
-import { education, profile, roles, socialLinks } from "@/content";
+import { education, profile, roles, services, socialLinks } from "@/content";
 import { siteConfig } from "@/lib/site";
 
 /**
@@ -36,6 +36,17 @@ export function PersonJsonLd() {
       "MLOps",
       "Cloud Architecture",
     ],
+    makesOffer: services.map((service) => ({
+      "@type": "Offer",
+      name: service.title,
+      description: service.summary,
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        price: service.rate,
+        priceCurrency: "USD",
+        unitText: "HOUR",
+      },
+    })),
   };
 
   return (

@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowRight,
+  CalendarClock,
   Check,
   Copy,
   CornerDownLeft,
@@ -13,16 +14,17 @@ import {
   Moon,
   Search,
   Sun,
-  type LucideIcon,
 } from "lucide-react";
 
-import { navItems, profile, skillGroups, systems } from "@/content";
+import { navItems, profile, skillGroups, socialLinks, systems } from "@/content";
 import { useTheme } from "@/components/providers/theme-provider";
 import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
 import { useMounted } from "@/lib/hooks/use-mounted";
-import { contentIcons } from "@/components/ui/icons";
+import { contentIcons, GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { focusSkillGroup } from "@/lib/events";
 import { cn, scrollToSection } from "@/lib/utils";
+
+const brandIcons = { github: GitHubIcon, linkedin: LinkedInIcon } as const;
 
 type CommandGroup = "Navigate" | "Skills" | "Systems" | "Actions";
 
@@ -31,7 +33,8 @@ interface CommandItem {
   label: string;
   hint?: string;
   group: CommandGroup;
-  icon: LucideIcon;
+  /** Lucide icons and the hand-rolled brand marks in `ui/icons` both fit. */
+  icon: React.ElementType<React.SVGProps<SVGSVGElement>>;
   keywords: string;
   perform: () => void;
   /** Keep the palette open after running — used by copy actions. */
@@ -119,7 +122,29 @@ function PaletteDialog({ onClose }: { onClose: () => void }) {
       perform: () => scrollToSection("systems"),
     }));
 
+    const brandLinkActions: CommandItem[] = socialLinks
+      .filter((link) => link.href.length > 0 && link.icon in brandIcons)
+      .map((link) => ({
+        id: `action-open-${link.icon}`,
+        label: `Open ${link.label} profile`,
+        hint: link.handle,
+        group: "Actions",
+        icon: brandIcons[link.icon as keyof typeof brandIcons],
+        keywords: `${link.label} ${link.handle} profile open`,
+        perform: () => window.open(link.href, "_blank", "noopener"),
+      }));
+
     const actions: CommandItem[] = [
+      {
+        id: "action-book-call",
+        label: "Book a free 30-min AI consultation",
+        hint: "Calendly",
+        group: "Actions",
+        icon: CalendarClock,
+        keywords: "calendly book call schedule meeting consultation free",
+        perform: () => window.open(profile.calendlyUrl, "_blank", "noopener"),
+      },
+      ...brandLinkActions,
       {
         id: "action-copy-email",
         label: "Copy email address",

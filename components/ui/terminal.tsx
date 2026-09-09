@@ -24,7 +24,7 @@ const toneClass = {
   prompt: "text-fg",
 } as const;
 
-const QUICK_COMMANDS = ["whoami", "skills", "experience", "systems", "contact"];
+const QUICK_COMMANDS = ["whoami", "skills", "experience", "pricing", "book"];
 
 /**
  * A real, keyboard-driven shell over the portfolio's content.
@@ -64,6 +64,7 @@ export function Terminal({ className }: { className?: string }) {
         goto: scrollToSection,
         toggleTheme,
         downloadResume: () => window.open(profile.resumePath, "_blank", "noopener"),
+        bookCall: () => window.open(profile.calendlyUrl, "_blank", "noopener"),
         clear: () => {
           cleared = true;
         },

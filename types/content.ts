@@ -84,3 +84,17 @@ export interface EducationEntry {
   location: string;
   period: string;
 }
+
+export interface Service {
+  id: string;
+  title: string;
+  icon: IconName;
+  /** One-line framing of the engagement. */
+  summary: string;
+  /** Hourly rate in USD. */
+  rate: number;
+  /** e.g. "Starting at" — shown before the rate. */
+  rateNote: string;
+  /** What's included, 2–4 short bullets. */
+  deliverables: string[];
+}

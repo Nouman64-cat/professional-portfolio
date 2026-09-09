@@ -1,4 +1,4 @@
-import { profile, roles, skillGroups, systems } from "@/content";
+import { profile, roles, services, skillGroups, systems } from "@/content";
 
 export type LineTone = "default" | "muted" | "accent" | "error" | "prompt";
 
@@ -13,6 +13,7 @@ export interface TerminalContext {
   goto: (sectionId: string) => void;
   toggleTheme: () => void;
   downloadResume: () => void;
+  bookCall: () => void;
   clear: () => void;
 }
 
@@ -111,6 +112,19 @@ const commandList: CommandSpec[] = [
       ]),
   },
   {
+    name: "pricing",
+    usage: "pricing",
+    description: "Hourly rates for every service",
+    run: () => [
+      ...services.flatMap((service) => [
+        `${service.title} — ${service.rateNote.toLowerCase()} $${service.rate}/hr`,
+        `  ${service.summary}`,
+        "",
+      ]),
+      "Every engagement starts with a free 30-min call — run `book` to schedule.",
+    ],
+  },
+  {
     name: "contact",
     usage: "contact",
     description: "How to reach me",
@@ -119,8 +133,17 @@ const commandList: CommandSpec[] = [
       `phone   ${profile.phone}`,
       `place   ${profile.location}`,
       "",
-      "Or run `goto contact` to jump to the form.",
+      "Or run `goto contact` to jump to the form, or `book` for a free call.",
     ],
+  },
+  {
+    name: "book",
+    usage: "book",
+    description: "Book a free 30-min AI consultation (Calendly)",
+    run: (_args, context) => {
+      context.bookCall();
+      return ["Opening Calendly…"];
+    },
   },
   {
     name: "resume",
@@ -134,10 +157,10 @@ const commandList: CommandSpec[] = [
   {
     name: "goto",
     usage: "goto <section>",
-    description: "Scroll to about | skills | experience | systems | contact",
+    description: "Scroll to about | skills | experience | systems | pricing | contact",
     run: (args, context) => {
       const target = args[0]?.toLowerCase();
-      const sections = ["about", "skills", "experience", "systems", "contact"];
+      const sections = ["about", "skills", "experience", "systems", "pricing", "contact"];
       if (!target || !sections.includes(target)) {
         return [`goto: expected one of ${sections.join(", ")}`];
       }

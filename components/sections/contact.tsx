@@ -6,6 +6,7 @@ import { Check, Copy, Mail, MapPin, Phone, Send } from "lucide-react";
 
 import { profile, socialLinks } from "@/content";
 import { ActionLink } from "@/components/ui/action-link";
+import { ConsultationBanner } from "@/components/ui/consultation-banner";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { Magnetic } from "@/components/ui/magnetic";
 import { Reveal } from "@/components/ui/reveal";
@@ -85,12 +86,16 @@ export function Contact() {
   return (
     <Section id="contact">
       <SectionHeading
-        index="05 — Contact"
+        index="06 — Contact"
         title="Have a system worth building? Let's talk."
         description="I'm open to senior and lead AI engineering roles, and to consulting on RAG, agentic systems and LLM infrastructure."
       />
 
-      <div className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+      <Reveal className="mt-12">
+        <ConsultationBanner variant="compact" />
+      </Reveal>
+
+      <div className="mt-8 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
         <div className="space-y-4">
           {details.map((detail, index) => {
             const Icon = detail.icon;
