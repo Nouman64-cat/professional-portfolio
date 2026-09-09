@@ -1,4 +1,12 @@
-import { education, profile, projects, roles, services, socialLinks } from "@/content";
+import {
+  education,
+  openSourceEntries,
+  profile,
+  projects,
+  roles,
+  services,
+  socialLinks,
+} from "@/content";
 import { siteConfig } from "@/lib/site";
 
 /**
@@ -47,12 +55,22 @@ export function PersonJsonLd() {
         unitText: "HOUR",
       },
     })),
-    owns: projects.map((project) => ({
-      "@type": "CreativeWork",
-      name: project.title,
-      description: project.description,
-      url: project.links.find((link) => link.label.toLowerCase().includes("github"))?.href,
-    })),
+    owns: [
+      ...projects.map((project) => ({
+        "@type": "CreativeWork",
+        name: project.title,
+        description: project.description,
+        url: project.links.find((link) => link.label.toLowerCase().includes("github"))?.href,
+      })),
+      ...openSourceEntries.map((entry) => ({
+        "@type": "SoftwareSourceCode",
+        name: entry.title,
+        description: entry.description,
+        codeRepository: entry.links.find((link) => link.label.toLowerCase().includes("github"))
+          ?.href,
+        programmingLanguage: entry.stack[0],
+      })),
+    ],
   };
 
   return (

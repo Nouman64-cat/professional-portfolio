@@ -24,11 +24,11 @@ export function SiteHeader() {
   useMotionValueEvent(scrollY, "change", (latest) => setCondensed(latest > 24));
 
   // Close the mobile sheet whenever the viewport grows past the breakpoint.
-  // Matches the `lg` breakpoint below, where the full nav takes over — with
-  // seven nav items plus the header CTAs, `md` is too narrow to fit them.
+  // Matches the `xl` breakpoint below — eight nav items plus the header
+  // CTAs need the full max-w-6xl container width to fit without wrapping.
   useEffect(() => {
     if (!menuOpen) return;
-    const media = window.matchMedia("(min-width: 1024px)");
+    const media = window.matchMedia("(min-width: 1280px)");
     const onChange = () => media.matches && setMenuOpen(false);
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
@@ -58,12 +58,12 @@ export function SiteHeader() {
           <span className="accent-gradient grid size-8 place-items-center rounded-lg font-mono text-sm font-bold text-accent-contrast">
             NE
           </span>
-          <span className="hidden text-sm font-semibold tracking-tight sm:block">
+          <span className="hidden text-sm font-semibold tracking-tight whitespace-nowrap sm:block">
             {profile.name}
           </span>
         </button>
 
-        <nav aria-label="Sections" className="hidden lg:block">
+        <nav aria-label="Sections" className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {navItems.map((item) => {
               const active = activeId === item.id;
@@ -74,7 +74,7 @@ export function SiteHeader() {
                     onClick={() => go(item.id)}
                     aria-current={active ? "true" : undefined}
                     className={cn(
-                      "relative rounded-full px-3.5 py-1.5 text-sm transition-colors",
+                      "relative rounded-full px-2.5 py-1.5 text-sm whitespace-nowrap transition-colors",
                       active ? "text-fg" : "text-muted hover:text-fg",
                     )}
                   >
@@ -94,12 +94,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Magnetic className="hidden lg:inline-flex">
+          <Magnetic className="hidden xl:inline-flex">
             <a
               href={profile.calendlyUrl}
               target="_blank"
               rel="noreferrer noopener"
-              className="accent-gradient inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold text-accent-contrast shadow-[0_8px_24px_-10px_var(--glow)] transition-all hover:brightness-110"
+              className="accent-gradient inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold whitespace-nowrap text-accent-contrast shadow-[0_8px_24px_-10px_var(--glow)] transition-all hover:brightness-110"
             >
               <CalendarClock className="size-3.5" aria-hidden />
               Free consult
@@ -109,7 +109,7 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => setPaletteOpen(true)}
-            className="hidden items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent/50 hover:text-fg lg:flex"
+            className="hidden items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-muted transition-colors hover:border-accent/50 hover:text-fg xl:flex"
           >
             <Command className="size-3.5" aria-hidden />
             <span>Search</span>
@@ -124,7 +124,7 @@ export function SiteHeader() {
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="grid size-9 place-items-center rounded-full border border-border bg-surface text-muted lg:hidden"
+            className="grid size-9 place-items-center rounded-full border border-border bg-surface text-muted xl:hidden"
           >
             {menuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
@@ -140,7 +140,7 @@ export function SiteHeader() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-b border-border bg-bg/95 backdrop-blur-xl lg:hidden"
+            className="overflow-hidden border-b border-border bg-bg/95 backdrop-blur-xl xl:hidden"
           >
             <ul className="mx-auto flex max-w-6xl flex-col px-5 py-3 sm:px-8">
               {navItems.map((item) => (

@@ -1,4 +1,12 @@
-import { profile, projects, roles, services, skillGroups, systems } from "@/content";
+import {
+  openSourceEntries,
+  profile,
+  projects,
+  roles,
+  services,
+  skillGroups,
+  systems,
+} from "@/content";
 
 export type LineTone = "default" | "muted" | "accent" | "error" | "prompt";
 
@@ -124,6 +132,19 @@ const commandList: CommandSpec[] = [
       ]),
   },
   {
+    name: "oss",
+    usage: "oss",
+    description: "Published packages and applied labs",
+    run: () =>
+      openSourceEntries.flatMap((entry) => [
+        `${entry.title} — ${entry.tagline}`,
+        `  ${entry.status}${entry.version ? ` · ${entry.version}` : ""}`,
+        ...(entry.install ? [`  ${entry.install}`] : []),
+        ...entry.links.map((link) => `  ${link.label}: ${link.href}`),
+        "",
+      ]),
+  },
+  {
     name: "pricing",
     usage: "pricing",
     description: "Hourly rates for every service",
@@ -169,7 +190,8 @@ const commandList: CommandSpec[] = [
   {
     name: "goto",
     usage: "goto <section>",
-    description: "Scroll to about | skills | experience | systems | projects | pricing | contact",
+    description:
+      "Scroll to about | skills | experience | systems | projects | open-source | pricing | contact",
     run: (args, context) => {
       const target = args[0]?.toLowerCase();
       const sections = [
@@ -178,6 +200,7 @@ const commandList: CommandSpec[] = [
         "experience",
         "systems",
         "projects",
+        "open-source",
         "pricing",
         "contact",
       ];
@@ -241,7 +264,7 @@ export function runCommand(
     if (name === "ls") {
       return [
         makeLine(
-          "about  skills  experience  systems  projects  pricing  contact  resume  book",
+          "about  skills  experience  systems  projects  oss  pricing  contact  resume  book",
           "muted",
         ),
       ];

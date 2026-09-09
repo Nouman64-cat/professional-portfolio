@@ -16,7 +16,15 @@ import {
   Sun,
 } from "lucide-react";
 
-import { navItems, profile, projects, skillGroups, socialLinks, systems } from "@/content";
+import {
+  navItems,
+  openSourceEntries,
+  profile,
+  projects,
+  skillGroups,
+  socialLinks,
+  systems,
+} from "@/content";
 import { useTheme } from "@/components/providers/theme-provider";
 import { useCopyToClipboard } from "@/lib/hooks/use-copy-to-clipboard";
 import { useMounted } from "@/lib/hooks/use-mounted";
@@ -26,7 +34,7 @@ import { cn, scrollToSection } from "@/lib/utils";
 
 const brandIcons = { github: GitHubIcon, linkedin: LinkedInIcon } as const;
 
-type CommandGroup = "Navigate" | "Skills" | "Systems" | "Projects" | "Actions";
+type CommandGroup = "Navigate" | "Skills" | "Systems" | "Projects" | "Open Source" | "Actions";
 
 interface CommandItem {
   id: string;
@@ -41,7 +49,14 @@ interface CommandItem {
   keepOpen?: boolean;
 }
 
-const GROUP_ORDER: CommandGroup[] = ["Navigate", "Skills", "Systems", "Projects", "Actions"];
+const GROUP_ORDER: CommandGroup[] = [
+  "Navigate",
+  "Skills",
+  "Systems",
+  "Projects",
+  "Open Source",
+  "Actions",
+];
 
 interface CommandPaletteProps {
   open: boolean;
@@ -132,6 +147,16 @@ function PaletteDialog({ onClose }: { onClose: () => void }) {
       perform: () => scrollToSection("projects"),
     }));
 
+    const openSourceItems: CommandItem[] = openSourceEntries.map((entry) => ({
+      id: `oss-${entry.id}`,
+      label: entry.title,
+      hint: entry.tagline,
+      group: "Open Source",
+      icon: contentIcons[entry.icon],
+      keywords: `${entry.title} ${entry.tagline} ${entry.stack.join(" ")} ${entry.status}`,
+      perform: () => scrollToSection("open-source"),
+    }));
+
     const brandLinkActions: CommandItem[] = socialLinks
       .filter((link) => link.href.length > 0 && link.icon in brandIcons)
       .map((link) => ({
@@ -144,6 +169,20 @@ function PaletteDialog({ onClose }: { onClose: () => void }) {
         perform: () => window.open(link.href, "_blank", "noopener"),
       }));
 
+    const packageActions: CommandItem[] = openSourceEntries.flatMap((entry) =>
+      entry.links
+        .filter((link) => link.label === "npm" || link.label === "PyPI")
+        .map((link) => ({
+          id: `action-open-${entry.id}-${link.label.toLowerCase()}`,
+          label: `Open ${entry.title} on ${link.label}`,
+          hint: entry.version,
+          group: "Actions" as const,
+          icon: ArrowRight,
+          keywords: `${entry.title} ${link.label} package registry install`,
+          perform: () => window.open(link.href, "_blank", "noopener"),
+        })),
+    );
+
     const actions: CommandItem[] = [
       {
         id: "action-book-call",
@@ -155,6 +194,7 @@ function PaletteDialog({ onClose }: { onClose: () => void }) {
         perform: () => window.open(profile.calendlyUrl, "_blank", "noopener"),
       },
       ...brandLinkActions,
+      ...packageActions,
       {
         id: "action-copy-email",
         label: "Copy email address",
@@ -209,7 +249,14 @@ function PaletteDialog({ onClose }: { onClose: () => void }) {
       },
     ];
 
-    return [...navigate, ...skills, ...systemItems, ...projectItems, ...actions];
+    return [
+      ...navigate,
+      ...skills,
+      ...systemItems,
+      ...projectItems,
+      ...openSourceItems,
+      ...actions,
+    ];
   }, [copied, copy, theme, toggleTheme]);
 
   const results = useMemo(() => {

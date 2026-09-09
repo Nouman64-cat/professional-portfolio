@@ -120,3 +120,21 @@ export interface Project {
   /** 0–2 entries: live demo first, then source. Omit what doesn't exist. */
   links: ProjectLink[];
 }
+
+export interface OpenSourceEntry {
+  id: string;
+  title: string;
+  tagline: string;
+  icon: IconName;
+  /** e.g. "Published on PyPI", "Published on npm", "Hands-on lab". */
+  status: string;
+  description: string;
+  /** What's real about it — 2–4 concrete, checkable bullets. */
+  highlights: string[];
+  stack: string[];
+  /** Copyable shell command — omitted for non-package entries. */
+  install?: string;
+  /** e.g. "v0.2.7" — omitted for non-package entries. */
+  version?: string;
+  links: ProjectLink[];
+}
